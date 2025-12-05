@@ -1,0 +1,50 @@
+class Node {
+    Node parent;
+    String value;
+
+    Node(String value, Node parent) {
+        this.value = value;
+        this.parent = parent;
+    }
+}
+
+public class HeightBad {
+    public int depth(Node p) {
+        if (p.parent == null) // raíz
+            return 0;
+        else
+            return 1 + depth(p.parent);
+    }
+
+    public boolean isExternal(Node p, Node[] allNodes) {
+        for (Node n : allNodes) {
+            if (n.parent == p) {
+                return false; // tiene al menos un hijo
+            }
+        }
+        return true;
+    }
+    
+    public int heightBad(Node[] allNodes) {
+        int h = 0;
+        for (Node p : allNodes) {
+            if (isExternal(p, allNodes)) {
+                h = Math.max(h, depth(p));
+            }
+        }
+        return h;
+    }
+
+    public static void main(String[] args) {
+        // Creamos un árbol sencillo
+        Node root = new Node("Raíz", null);
+        Node child1 = new Node("Hijo1", root);
+        Node child2 = new Node("Hijo2", child1);
+
+        Node[] allNodes = {root, child1, child2};
+
+        HeightBad hb = new HeightBad();
+
+        System.out.println("Altura del árbol: " + hb.heightBad(allNodes)); // 2
+    }
+}
