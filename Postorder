@@ -1,0 +1,26 @@
+public class P4_Postorder {
+
+    static class Node {
+        String value;
+        List<Node> children = new ArrayList<>();
+        Node(String v) { value = v; }
+    }
+
+    public static void postorder(Node p, List<String> out) {
+        for (Node c : p.children) postorder(c, out);
+        out.add(p.value); // visitar después
+    }
+
+    public static void main(String[] args) {
+        Node A = new Node("A");
+        Node B = new Node("B");
+        Node C = new Node("C");
+        Node D = new Node("D");
+        A.children.add(B); A.children.add(C);
+        B.children.add(D);
+
+        List<String> result = new ArrayList<>();
+        postorder(A, result);
+        System.out.println("Postorder: " + result); // D B C A
+    }
+}
