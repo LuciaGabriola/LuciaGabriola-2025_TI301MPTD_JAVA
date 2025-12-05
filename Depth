@@ -1,0 +1,30 @@
+class Node {
+    Node parent;
+    String value;
+
+    Node(String value, Node parent) {
+        this.value = value;
+        this.parent = parent;
+    }
+}
+
+public class Depth {
+    public int depth(Node p) {
+        if (p.parent == null) // si no tiene padre, es raíz
+            return 0;
+        else
+            return 1 + depth(p.parent);
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node("Raíz", null);
+        Node child1 = new Node("Hijo1", root);
+        Node child2 = new Node("Hijo2", child1);
+
+        Depth d = new Depth();
+
+        System.out.println("Profundidad de root: " + d.depth(root));   // 0
+        System.out.println("Profundidad de child1: " + d.depth(child1)); // 1
+        System.out.println("Profundidad de child2: " + d.depth(child2)); // 2
+    }
+}
