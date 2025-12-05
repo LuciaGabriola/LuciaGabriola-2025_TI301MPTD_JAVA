@@ -1,0 +1,60 @@
+import java.util.*;
+
+class Position<E> {
+    private E element;
+    private List<Position<E>> children;
+
+    public Position(E element) {
+        this.element = element;
+        this.children = new ArrayList<>();
+    }
+
+    public E getElement() {
+        return element;
+    }
+
+    public List<Position<E>> getChildren() {
+        return children;
+    }
+
+    public void addChild(Position<E> child) {
+        children.add(child);
+    }
+
+    public boolean isExternal() {
+        return children.isEmpty();
+    }
+}
+
+class TreeHeight<E> {
+    public List<Position<E>> children(Position<E> p) {
+        return p.getChildren();
+    }
+
+    public int height(Position<E> p) {
+        if (p.isExternal()) return 0; // caso base
+        int h = 0;
+        for (Position<E> c : children(p)) {
+            h = Math.max(h, 1 + height(c));
+        }
+        return h;
+    }
+}
+
+public class Height {
+    public static void main(String[] args) {
+        Position<String> root = new Position<>("A");
+        Position<String> b = new Position<>("B");
+        Position<String> c = new Position<>("C");
+        Position<String> d = new Position<>("D");
+        Position<String> e = new Position<>("E");
+
+        root.addChild(b);
+        root.addChild(c);
+        b.addChild(d);
+        d.addChild(e);
+
+        TreeHeight<String> tree = new TreeHeight<>();
+        System.out.println("Altura del árbol: " + tree.height(root));
+    }
+}
