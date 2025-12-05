@@ -1,0 +1,27 @@
+static class Node {
+        String value;
+        List<Node> children = new ArrayList<>();
+        Node(String v) { value = v; }
+        Node left() { return children.size() > 0 ? children.get(0) : null; }
+        Node right() { return children.size() > 1 ? children.get(1) : null; }
+    }
+
+    public static void inorder(Node p, List<String> out) {
+        if (p.left() != null) inorder(p.left(), out);
+        out.add(p.value); // visitar en medio
+        if (p.right() != null) inorder(p.right(), out);
+    }
+
+    public static void main(String[] args) {
+        Node A = new Node("A");
+        Node B = new Node("B");
+        Node C = new Node("C");
+        Node D = new Node("D");
+        A.children.add(B); A.children.add(C);
+        C.children.add(D);
+
+        List<String> result = new ArrayList<>();
+        inorder(A, result);
+        System.out.println("Inorder: " + result); // B A D C
+    }
+}
