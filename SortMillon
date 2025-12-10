@@ -1,0 +1,22 @@
+import java.util.Arrays;
+import java.util.Random;
+
+public class SortMillon {
+    public static void main(String[] args) {
+        int n = 1_000_000;
+        int[] números = new int[n];
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            números[i] = rand.nextInt(1_000_000);
+        }
+
+        // Ordenamiento eficiente (Dual-Pivot Quicksort)
+        Arrays.sort(números);
+
+        System.out.println("Arreglo ordenado:");
+        for (int num : números) {
+            System.out.print(num + " ");
+        }
+    }
+}
