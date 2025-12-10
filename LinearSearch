@@ -1,0 +1,33 @@
+import java.util.Random;
+
+public class LinearSearch {
+    public static void main(String[] args) {
+        int n = 1_000_000; // tamaño del arreglo
+        int[] numeros = new int[n];
+        Random rand = new Random();
+
+        // Generar 1,000,000 números aleatorios
+        for (int i = 0; i < n; i++) {
+            numeros[i] = rand.nextInt(1_000_000); // rango 0 a 999,999
+        }
+
+        // Target a buscar
+        int target = 517;
+        int posicion = -1;
+
+        // Búsqueda lineal
+        for (int i = 0; i < numeros.length; i++) {
+            if (numeros[i] == target) {
+                posicion = i;
+                break; // detener al encontrarlo
+            }
+        }
+
+        // Resultado
+        if (posicion != -1) {
+            System.out.println("Número " + target + " encontrado en la posición: " + posicion);
+        } else {
+            System.out.println("Número " + target + " no está en el arreglo.");
+        }
+    }
+}
