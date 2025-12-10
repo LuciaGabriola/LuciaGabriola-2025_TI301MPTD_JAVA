@@ -1,0 +1,77 @@
+import java.util.Random;
+
+public class QuickSortBinarySearch {
+    
+    // --- Algoritmo Quicksort ---
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high]; // último elemento como pivote
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                // intercambio
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        // colocar pivote en su lugar
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
+    }
+
+    // --- Algoritmo Binary Search ---
+    public static int binarySearch(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) {
+                return mid; // encontrado
+            }
+            if (arr[mid] < target) {
+                left = mid + 1; // buscar en la derecha
+            } else {
+                right = mid - 1; // buscar en la izquierda
+            }
+        }
+        return -1; // no encontrado
+    }
+
+    // --- Programa principal ---
+    public static void main(String[] args) {
+        int n = 1000000; // tamaño del arreglo
+        int[] numeros = new int[n];
+        Random rand = new Random();
+
+        // Generar números aleatorios
+        for (int i = 0; i < n; i++) {
+            numeros[i] = rand.nextInt(1000000); // rango 0 - 999,999
+        }
+
+        // Ordenar con Quicksort
+        quickSort(numeros, 0, numeros.length - 1);
+
+        // Buscar el número 517 con Binary Search
+        int target = 517;
+        int resultado = binarySearch(numeros, target);
+
+        if (resultado != -1) {
+            System.out.println("Número " + target + " encontrado en la posición: " + resultado);
+        } else {
+            System.out.println("Número " + target + " no está en el arreglo.");
+        }
+    }
+}
